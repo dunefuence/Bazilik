@@ -41,7 +41,7 @@ export default function Navbar() {
             {RESTAURANT.name}
           </button>
 
-          <nav className="hidden items-center gap-8 lg:flex">
+          <nav className="hidden items-center gap-8 md:flex">
             {NAV_LINKS.map((link) => (
               <button
                 key={link.href}
@@ -62,7 +62,7 @@ export default function Navbar() {
             </button>
             <button
               onClick={() => setOpen(true)}
-              className="text-basil-cream transition-colors hover:text-white lg:hidden"
+              className="text-basil-cream transition-colors hover:text-white md:hidden"
               aria-label="Открыть меню"
             >
               <Menu size={28} />
@@ -73,7 +73,7 @@ export default function Navbar() {
 
       {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 z-[60] bg-basil-deep transition-all duration-500 lg:hidden ${
+        className={`fixed inset-0 z-[60] bg-basil-deep transition-all duration-500 md:hidden ${
           open ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >

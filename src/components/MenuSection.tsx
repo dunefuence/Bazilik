@@ -77,7 +77,7 @@ export default function MenuSection() {
             onClick={scrollToBooking}
             className="rounded-full border border-basil-deep px-8 py-4 text-sm font-semibold tracking-wide text-basil-deep transition-all hover:bg-basil-deep hover:text-basil-cream"
           >
-            Смотреть полное меню
+            Забронировать столик
           </button>
         </div>
       </div>

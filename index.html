@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f1f16" />
+    <meta name="robots" content="index, follow" />
     <title>Базилик — ресторан-грилль-бар в Тамбове</title>
     <meta name="description" content="Ресторан-грилль-бар «Базилик» в Тамбове. Меню, банкетный зал, мероприятия и бронирование столиков." />
     <meta property="og:title" content="Базилик — ресторан-грилль-бар в Тамбове" />
@@ -12,6 +14,47 @@
     <meta property="og:image" content="https://bolt.new/static/og_default.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.pexels.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap"
+    />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Базилик",
+      "description": "Ресторан-грилль-бар в Тамбове",
+      "servesCuisine": ["Грилль", "Европейская", "Авторская"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Селезнёвская, 2А",
+        "addressLocality": "Тамбов",
+        "addressRegion": "Тамбовская область",
+        "addressCountry": "RU"
+      },
+      "telephone": "+74752558253",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+          "opens": "11:00",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Friday", "Saturday"],
+          "opens": "11:00",
+          "closes": "00:00"
+        }
+      ],
+      "acceptsReservations": "True"
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

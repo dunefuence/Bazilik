@@ -85,8 +85,9 @@ export default function BookingForm() {
           >
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
-                <label className="mb-2 block text-sm text-basil-cream/70">Дата</label>
+                <label htmlFor="booking-date" className="mb-2 block text-sm text-basil-cream/70">Дата</label>
                 <input
+                  id="booking-date"
                   type="date"
                   name="date"
                   required
@@ -95,8 +96,9 @@ export default function BookingForm() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-sm text-basil-cream/70">Время</label>
+                <label htmlFor="booking-time" className="mb-2 block text-sm text-basil-cream/70">Время</label>
                 <select
+                  id="booking-time"
                   name="time"
                   required
                   defaultValue=""
@@ -111,8 +113,9 @@ export default function BookingForm() {
             </div>
 
             <div>
-              <label className="mb-2 block text-sm text-basil-cream/70">Количество гостей</label>
+              <label htmlFor="booking-guests" className="mb-2 block text-sm text-basil-cream/70">Количество гостей</label>
               <select
+                id="booking-guests"
                 name="guests"
                 required
                 defaultValue="2"
@@ -127,8 +130,9 @@ export default function BookingForm() {
 
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
-                <label className="mb-2 block text-sm text-basil-cream/70">Имя</label>
+                <label htmlFor="booking-name" className="mb-2 block text-sm text-basil-cream/70">Имя</label>
                 <input
+                  id="booking-name"
                   type="text"
                   name="name"
                   required
@@ -137,8 +141,9 @@ export default function BookingForm() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-sm text-basil-cream/70">Телефон</label>
+                <label htmlFor="booking-phone" className="mb-2 block text-sm text-basil-cream/70">Телефон</label>
                 <input
+                  id="booking-phone"
                   type="tel"
                   name="phone"
                   required
@@ -149,8 +154,9 @@ export default function BookingForm() {
             </div>
 
             <div>
-              <label className="mb-2 block text-sm text-basil-cream/70">Комментарий</label>
+              <label htmlFor="booking-comment" className="mb-2 block text-sm text-basil-cream/70">Комментарий</label>
               <textarea
+                id="booking-comment"
                 name="comment"
                 rows={3}
                 placeholder="Особые пожелания, столик у окна, детский стул..."

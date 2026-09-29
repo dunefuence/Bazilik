@@ -138,8 +138,9 @@ export default function Banquets() {
             >
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-sm text-basil-graphite/70">Дата мероприятия</label>
+                  <label htmlFor="event-date" className="mb-2 block text-sm text-basil-graphite/70">Дата мероприятия</label>
                   <input
+                    id="event-date"
                     type="date"
                     name="event_date"
                     min={today}
@@ -147,8 +148,9 @@ export default function Banquets() {
                   />
                 </div>
                 <div>
-                  <label className="mb-2 block text-sm text-basil-graphite/70">Количество гостей</label>
+                  <label htmlFor="event-guests" className="mb-2 block text-sm text-basil-graphite/70">Количество гостей</label>
                   <input
+                    id="event-guests"
                     type="number"
                     name="guests"
                     min="1"
@@ -159,8 +161,9 @@ export default function Banquets() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm text-basil-graphite/70">Тип мероприятия</label>
+                <label htmlFor="event-type" className="mb-2 block text-sm text-basil-graphite/70">Тип мероприятия</label>
                 <select
+                  id="event-type"
                   name="event_type"
                   required
                   defaultValue=""
@@ -175,8 +178,9 @@ export default function Banquets() {
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-sm text-basil-graphite/70">Имя</label>
+                  <label htmlFor="event-name" className="mb-2 block text-sm text-basil-graphite/70">Имя</label>
                   <input
+                    id="event-name"
                     type="text"
                     name="name"
                     required
@@ -185,8 +189,9 @@ export default function Banquets() {
                   />
                 </div>
                 <div>
-                  <label className="mb-2 block text-sm text-basil-graphite/70">Телефон</label>
+                  <label htmlFor="event-phone" className="mb-2 block text-sm text-basil-graphite/70">Телефон</label>
                   <input
+                    id="event-phone"
                     type="tel"
                     name="phone"
                     required
@@ -197,8 +202,9 @@ export default function Banquets() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm text-basil-graphite/70">Комментарий</label>
+                <label htmlFor="event-comment" className="mb-2 block text-sm text-basil-graphite/70">Комментарий</label>
                 <textarea
+                  id="event-comment"
                   name="comment"
                   rows={3}
                   placeholder="Расскажите о вашем событии..."
