@@ -17,7 +17,7 @@ export default function Recommendations() {
   const others = RECOMMENDATIONS.filter((r) => !r.featured);
 
   return (
-    <section ref={ref} className="bg-basil-deep py-20 sm:py-28 lg:py-36">
+    <section ref={ref} id="recommendations" className="bg-basil-deep py-20 sm:py-28 lg:py-36">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         {/* Header — left aligned, editorial */}
         <div className="reveal mb-12 sm:mb-16">

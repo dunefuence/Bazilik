@@ -1,96 +1,133 @@
-import { Phone, MapPin, Clock, Navigation } from 'lucide-react';
+import { Phone, ArrowRight, MapPin } from 'lucide-react';
 import { RESTAURANT } from '@/data/site';
 import { useReveal } from '@/hooks/useReveal';
 
 export default function Contacts() {
   const ref = useReveal<HTMLElement>();
 
-  const scrollToBooking = () => {
-    document.querySelector('#booking')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const routeUrl = `https://yandex.ru/maps/?rtext=~${encodeURIComponent(RESTAURANT.mapQuery)}`;
-
   return (
-    <section ref={ref} id="contacts" className="bg-basil-deep py-24 sm:py-32">
+    <section ref={ref} id="contacts" className="bg-basil-graphite py-20 sm:py-28 lg:py-36">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Info */}
-          <div className="reveal">
-            <h2 className="font-serif text-5xl text-basil-cream sm:text-6xl md:text-7xl">
-              {RESTAURANT.name}
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+          {/* Left — editorial heading + contact info */}
+          <div className="reveal lg:col-span-7">
+            <p className="text-xs font-medium uppercase tracking-[0.25em] text-basil-herb">
+              Контакты
+            </p>
+            <div className="mt-5 h-px w-10 bg-basil-cream/15" />
+            <h2 className="mt-5 font-serif text-4xl font-normal leading-[1.1] text-basil-cream sm:text-5xl md:text-6xl">
+              Будем <em className="italic font-normal">ждать вас</em>
             </h2>
-            <p className="mt-3 text-basil-cream/60">{RESTAURANT.tagline}</p>
 
-            <div className="mt-10 space-y-6">
-              <div className="flex items-start gap-4">
-                <MapPin size={22} className="mt-1 shrink-0 text-basil-herb" />
-                <div>
-                  <p className="text-sm text-basil-cream/50">Адрес</p>
-                  <p className="text-lg text-basil-cream">{RESTAURANT.city}, {RESTAURANT.address}</p>
-                </div>
-              </div>
+            {/* Address — primary visual focus */}
+            <div className="mt-10">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-basil-cream/40">
+                Адрес
+              </p>
+              <p className="mt-2 font-serif text-2xl text-basil-cream sm:text-3xl">
+                Тамбов, {RESTAURANT.address}
+              </p>
+            </div>
 
-              <div className="flex items-start gap-4">
-                <Phone size={22} className="mt-1 shrink-0 text-basil-herb" />
-                <div>
-                  <p className="text-sm text-basil-cream/50">Телефон</p>
-                  <a
-                    href={RESTAURANT.phoneHref}
-                    className="text-lg text-basil-cream hover:text-white"
-                  >
-                    {RESTAURANT.phone}
-                  </a>
-                </div>
-              </div>
+            {/* Phone — clickable, large */}
+            <div className="mt-8">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-basil-cream/40">
+                Телефон
+              </p>
+              <a
+                href={RESTAURANT.phoneHref}
+                className="mt-2 inline-block font-serif text-2xl text-basil-cream transition-colors hover:text-basil-herb sm:text-3xl"
+              >
+                {RESTAURANT.phone}
+              </a>
+            </div>
 
-              <div className="flex items-start gap-4">
-                <Clock size={22} className="mt-1 shrink-0 text-basil-herb" />
-                <div>
-                  <p className="text-sm text-basil-cream/50">Режим работы</p>
-                  {RESTAURANT.hours.map((h) => (
-                    <p key={h.days} className="text-lg text-basil-cream">
-                      {h.days} {h.time}
-                    </p>
-                  ))}
-                </div>
+            {/* Hours */}
+            <div className="mt-8">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-basil-cream/40">
+                Режим работы
+              </p>
+              <div className="mt-2 space-y-1">
+                {RESTAURANT.hours.map((h) => (
+                  <p key={h.days} className="text-lg text-basil-cream/70">
+                    {h.days} · {h.time}
+                  </p>
+                ))}
               </div>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            {/* Quick actions */}
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href={RESTAURANT.phoneHref}
-                className="rounded-full bg-basil-herb px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-basil-mid"
+                className="inline-flex items-center gap-2 rounded-full bg-basil-herb px-7 py-4 text-sm font-semibold tracking-wide text-white transition-all hover:bg-basil-mid"
               >
+                <Phone size={16} />
                 Позвонить
               </a>
               <a
-                href={routeUrl}
+                href={RESTAURANT.maps.yandex}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-full border border-basil-cream/30 px-7 py-3.5 text-sm font-semibold text-basil-cream transition-colors hover:border-basil-cream hover:bg-basil-cream/10"
+                className="group inline-flex items-center gap-2 text-sm font-medium tracking-wide text-basil-cream/60 transition-colors hover:text-basil-cream"
               >
-                <Navigation size={16} />
                 Построить маршрут
+                <ArrowRight
+                  size={16}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
               </a>
-              <button
-                onClick={scrollToBooking}
-                className="rounded-full border border-basil-cream/30 px-7 py-3.5 text-sm font-semibold text-basil-cream transition-colors hover:border-basil-cream hover:bg-basil-cream/10"
-              >
-                Забронировать стол
-              </button>
             </div>
           </div>
 
-          {/* Map */}
-          <div className="reveal reveal-delay-2 overflow-hidden rounded-2xl">
-            <iframe
-              src={RESTAURANT.mapEmbed}
-              className="h-full min-h-[400px] w-full"
-              style={{ border: 0, filter: 'grayscale(0.3) invert(0.9) hue-rotate(120deg)' }}
-              loading="lazy"
-              title="Карта — Базилик, Тамбов"
-            />
+          {/* Right — map navigation block */}
+          <div className="reveal reveal-delay-2 lg:col-span-5">
+            <div className="flex h-full flex-col rounded-2xl bg-basil-deep/50 p-6 sm:p-8">
+              {/* Stylized map placeholder */}
+              <div className="relative mb-8 aspect-[4/3] overflow-hidden rounded-xl border border-basil-cream/5 bg-basil-mid/20">
+                <div className="absolute inset-0 bg-gradient-to-br from-basil-mid/30 via-transparent to-basil-deep/40" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-basil-herb/20">
+                    <MapPin size={24} className="text-basil-herb" />
+                  </div>
+                </div>
+                <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-basil-herb/10 blur-3xl" />
+                <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-basil-mid/20 blur-3xl" />
+                <p className="absolute bottom-4 left-4 font-serif text-lg text-basil-cream/40">
+                  {RESTAURANT.name}
+                </p>
+              </div>
+
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-basil-cream/40">
+                Найти нас
+              </p>
+              <div className="mt-4 flex flex-col gap-3">
+                <a
+                  href={RESTAURANT.maps.yandex}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between rounded-xl border border-basil-cream/10 bg-basil-deep/40 px-5 py-4 text-sm font-medium text-basil-cream/80 transition-colors hover:border-basil-cream/25 hover:text-basil-cream"
+                >
+                  Яндекс Карты
+                  <ArrowRight
+                    size={16}
+                    className="text-basil-cream/40 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-basil-cream/80"
+                  />
+                </a>
+                <a
+                  href={RESTAURANT.maps.gis2}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between rounded-xl border border-basil-cream/10 bg-basil-deep/40 px-5 py-4 text-sm font-medium text-basil-cream/80 transition-colors hover:border-basil-cream/25 hover:text-basil-cream"
+                >
+                  2ГИС
+                  <ArrowRight
+                    size={16}
+                    className="text-basil-cream/40 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-basil-cream/80"
+                  />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

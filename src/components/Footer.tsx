@@ -7,19 +7,21 @@ export default function Footer() {
 
   return (
     <footer className="bg-basil-deep text-basil-cream">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
-        <div className="grid gap-12 md:grid-cols-4">
-          <div className="md:col-span-1">
-            <div className="font-serif text-3xl font-semibold tracking-[0.15em]">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Left — brand */}
+          <div>
+            <div className="font-serif text-2xl font-normal tracking-[0.15em] text-basil-cream">
               {RESTAURANT.name}
             </div>
-            <p className="mt-3 text-sm text-basil-cream/60">
+            <p className="mt-3 text-sm text-basil-cream/50">
               {RESTAURANT.tagline} в Тамбове
             </p>
           </div>
 
-          <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-basil-cream/50">
+          {/* Center — navigation */}
+          <nav>
+            <h4 className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-basil-cream/40">
               Навигация
             </h4>
             <ul className="space-y-3">
@@ -27,42 +29,42 @@ export default function Footer() {
                 <li key={link.href}>
                   <button
                     onClick={() => handleNav(link.href)}
-                    className="text-sm text-basil-cream/75 transition-colors hover:text-white"
+                    className="text-sm text-basil-cream/65 transition-colors hover:text-basil-cream"
                   >
                     {link.label}
                   </button>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
+          {/* Right — contacts + socials */}
           <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-basil-cream/50">
+            <h4 className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-basil-cream/40">
               Контакты
             </h4>
-            <ul className="space-y-3 text-sm text-basil-cream/75">
+            <ul className="space-y-3 text-sm text-basil-cream/65">
               <li>
-                <a href={RESTAURANT.phoneHref} className="hover:text-white">
+                <a
+                  href={RESTAURANT.phoneHref}
+                  className="transition-colors hover:text-basil-cream"
+                >
                   {RESTAURANT.phone}
                 </a>
               </li>
-              <li>{RESTAURANT.address}, {RESTAURANT.city}</li>
-              {RESTAURANT.hours.map((h) => (
-                <li key={h.days}>{h.days} {h.time}</li>
-              ))}
+              <li>
+                {RESTAURANT.city}, {RESTAURANT.address}
+              </li>
             </ul>
-          </div>
 
-          <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-basil-cream/50">
-              Соцсети
-            </h4>
-            <div className="flex gap-3">
+            <div className="mt-6 flex flex-wrap gap-2.5">
               {RESTAURANT.socials.map((s) => (
                 <a
                   key={s.label}
                   href={s.href}
-                  className="rounded-full border border-basil-cream/20 px-5 py-2 text-sm text-basil-cream/75 transition-colors hover:border-basil-herb hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-basil-cream/15 px-4 py-2 text-xs font-medium text-basil-cream/65 transition-colors hover:border-basil-herb/50 hover:text-basil-cream"
                 >
                   {s.label}
                 </a>
@@ -71,11 +73,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-basil-cream/10 pt-8 text-xs text-basil-cream/40 sm:flex-row">
-          <p>© {new Date().getFullYear()} {RESTAURANT.name}. Все права защищены.</p>
-          <a href="#" className="hover:text-basil-cream/70">
-            Политика конфиденциальности
-          </a>
+        {/* Copyright */}
+        <div className="mt-14 border-t border-basil-cream/8 pt-8">
+          <p className="text-xs text-basil-cream/35">
+            © {new Date().getFullYear()} {RESTAURANT.name}
+          </p>
         </div>
       </div>
     </footer>
