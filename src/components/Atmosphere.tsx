@@ -1,120 +1,71 @@
-import { useState, useEffect, useCallback } from 'react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { GALLERY_IMAGES } from '@/data/menu';
 import { useReveal } from '@/hooks/useReveal';
+import { ArrowRight } from 'lucide-react';
+
+function Placeholder({ className }: { className?: string }) {
+  return (
+    <div
+      className={`relative overflow-hidden rounded-2xl border border-basil-cream/5 bg-basil-mid/20 ${
+        className ?? ''
+      }`}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-basil-mid/30 via-transparent to-basil-deep/40" />
+      <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-basil-herb/10 blur-3xl" />
+      <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-basil-mid/20 blur-3xl" />
+    </div>
+  );
+}
 
 export default function Atmosphere() {
   const ref = useReveal<HTMLElement>();
-  const [lightbox, setLightbox] = useState<number | null>(null);
 
-  const closeLightbox = useCallback(() => setLightbox(null), []);
-  const next = useCallback(() => {
-    setLightbox((prev) => (prev === null ? null : (prev + 1) % GALLERY_IMAGES.length));
-  }, []);
-  const prevImage = useCallback(() => {
-    setLightbox((prev) =>
-      prev === null ? null : (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length
-    );
-  }, []);
-
-  useEffect(() => {
-    if (lightbox === null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'ArrowLeft') prevImage();
-    };
-    window.addEventListener('keydown', onKey);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      document.body.style.overflow = '';
-    };
-  }, [lightbox, closeLightbox, next, prevImage]);
-
-  // Masonry-like layout with varied spans
-  const spans = [
-    'sm:col-span-2 sm:row-span-2',
-    '',
-    '',
-    'sm:row-span-2',
-    '',
-    '',
-    'sm:col-span-2',
-    '',
-    '',
-    'sm:col-span-2 sm:row-span-2',
-  ];
+  const scrollToBooking = () => {
+    document.querySelector('#booking')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <section ref={ref} id="atmosphere" className="bg-basil-deep py-24 sm:py-32">
+    <section ref={ref} id="atmosphere" className="bg-basil-deep py-20 sm:py-28 lg:py-36">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="reveal mb-12 text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-basil-herb">
-            Атмосфера
-          </p>
-          <h2 className="font-serif text-4xl text-basil-cream sm:text-5xl md:text-6xl">
-            Загляните внутрь
-          </h2>
+        <div className="grid gap-6 lg:grid-cols-12 lg:gap-8 lg:grid-rows-2">
+          {/* Text block — first on mobile, top-right on desktop */}
+          <div className="reveal order-1 lg:order-2 lg:col-span-5 lg:pt-8">
+            <p className="text-xs font-medium uppercase tracking-[0.25em] text-basil-herb">
+              Атмосфера
+            </p>
+            <div className="mt-5 h-px w-10 bg-basil-cream/15" />
+            <h2 className="mt-5 font-serif text-4xl font-normal leading-[1.1] text-basil-cream sm:text-5xl md:text-6xl">
+              Загляните <em className="italic font-normal">внутрь</em>
+            </h2>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-basil-cream/60">
+              Тёплый свет, запах гриля, звон бокалов. Вечер, который не хочется заканчивать.
+            </p>
+          </div>
+
+          {/* Large placeholder — second on mobile, left on desktop, spans 2 rows */}
+          <div className="reveal reveal-delay-1 order-2 lg:order-1 lg:col-span-7 lg:row-span-2">
+            <Placeholder className="aspect-[4/5] sm:aspect-[3/4] lg:h-full lg:min-h-[560px]" />
+          </div>
+
+          {/* Two small placeholders — bottom-right on desktop */}
+          <div className="reveal reveal-delay-2 order-3 grid grid-cols-2 gap-4 sm:gap-6 lg:col-span-5">
+            <Placeholder className="aspect-[3/4]" />
+            <Placeholder className="aspect-[3/4]" />
+          </div>
         </div>
 
-        <div className="reveal reveal-delay-1 grid auto-rows-[200px] grid-cols-2 gap-3 sm:auto-rows-[240px] sm:grid-cols-4 sm:gap-4">
-          {GALLERY_IMAGES.map((img, i) => (
-            <button
-              key={i}
-              onClick={() => setLightbox(i)}
-              className={`group relative overflow-hidden rounded-xl ${spans[i] || ''}`}
-            >
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-basil-deep/0 transition-colors duration-300 group-hover:bg-basil-deep/20" />
-            </button>
-          ))}
+        {/* Subtle CTA */}
+        <div className="reveal mt-14 sm:mt-20">
+          <button
+            onClick={scrollToBooking}
+            className="group inline-flex items-center gap-2 text-sm font-medium tracking-wide text-basil-cream/50 transition-colors hover:text-basil-cream"
+          >
+            Забронировать стол
+            <ArrowRight
+              size={16}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </button>
         </div>
       </div>
-
-      {/* Lightbox */}
-      {lightbox !== null && (
-        <div
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-basil-deep/95 backdrop-blur-sm"
-          onClick={closeLightbox}
-        >
-          <button
-            onClick={closeLightbox}
-            className="absolute right-5 top-5 text-basil-cream/80 hover:text-white"
-            aria-label="Закрыть"
-          >
-            <X size={32} />
-          </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
-            className="absolute left-4 text-basil-cream/80 hover:text-white sm:left-8"
-            aria-label="Предыдущее"
-          >
-            <ChevronLeft size={40} />
-          </button>
-          <img
-            src={GALLERY_IMAGES[lightbox].src}
-            alt={GALLERY_IMAGES[lightbox].alt}
-            className="max-h-[85vh] max-w-[90vw] rounded-lg object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <button
-            onClick={(e) => { e.stopPropagation(); next(); }}
-            className="absolute right-4 text-basil-cream/80 hover:text-white sm:right-8"
-            aria-label="Следующее"
-          >
-            <ChevronRight size={40} />
-          </button>
-          <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-sm text-basil-cream/50">
-            {lightbox + 1} / {GALLERY_IMAGES.length}
-          </p>
-        </div>
-      )}
     </section>
   );
 }
