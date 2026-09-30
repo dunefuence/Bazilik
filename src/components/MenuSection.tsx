@@ -13,42 +13,64 @@ export default function MenuSection() {
   };
 
   return (
-    <section ref={ref} id="menu" className="bg-basil-cream py-24 sm:py-32">
+    <section ref={ref} id="menu" className="bg-basil-graphite py-20 sm:py-28 lg:py-36">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="reveal mb-12 text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-basil-herb">
+        {/* Header — left aligned, editorial */}
+        <div className="reveal mb-10 sm:mb-14">
+          <p className="text-xs font-medium uppercase tracking-[0.25em] text-basil-herb">
             Меню
           </p>
-          <h2 className="font-serif text-4xl text-basil-graphite sm:text-5xl md:text-6xl">
+          <h2 className="mt-4 font-serif text-4xl font-normal text-basil-cream sm:text-5xl md:text-6xl">
             Кухня и бар
           </h2>
         </div>
 
-        {/* Category tabs */}
-        <div className="reveal reveal-delay-1 mb-12 flex flex-wrap justify-center gap-2 sm:gap-3">
-          {MENU_CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActive(cat.id)}
-              className={`rounded-full px-5 py-2.5 text-sm font-medium tracking-wide transition-all sm:px-6 ${
-                active === cat.id
-                  ? 'bg-basil-deep text-basil-cream'
-                  : 'bg-basil-deep/5 text-basil-graphite/70 hover:bg-basil-deep/10'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
+        {/* Category navigation — horizontal scroll on mobile, wrap on desktop */}
+        <div className="reveal reveal-delay-1 mb-10 sm:mb-14">
+          {/* Mobile: scrollable row */}
+          <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-2 sm:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {MENU_CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActive(cat.id)}
+                className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-medium tracking-wide transition-all ${
+                  active === cat.id
+                    ? 'bg-basil-herb text-white'
+                    : 'bg-basil-cream/5 text-basil-cream/60'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Desktop: centered wrap */}
+          <div className="hidden flex-wrap justify-center gap-2 sm:flex">
+            {MENU_CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActive(cat.id)}
+                className={`rounded-full px-6 py-2.5 text-sm font-medium tracking-wide transition-all ${
+                  active === cat.id
+                    ? 'bg-basil-herb text-white'
+                    : 'bg-basil-cream/5 text-basil-cream/60 hover:bg-basil-cream/10 hover:text-basil-cream/80'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Dishes grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Dishes — editorial list layout */}
+        <div
+          key={active}
+          className="menu-fade-in grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {category.dishes.map((dish) => (
-            <article
-              key={dish.name}
-              className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-lg"
-            >
-              <div className="aspect-[16/10] overflow-hidden">
+            <article key={dish.name} className="group flex flex-col">
+              {/* Image */}
+              <div className="aspect-[5/4] overflow-hidden rounded-lg">
                 <img
                   src={dish.image}
                   alt={dish.name}
@@ -56,26 +78,35 @@ export default function MenuSection() {
                   loading="lazy"
                 />
               </div>
-              <div className="p-5">
-                <h3 className="font-serif text-xl text-basil-graphite">{dish.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-basil-graphite/60">
-                  {dish.description}
-                </p>
-                <div className="mt-4 flex items-center justify-between text-sm">
-                  <span className="text-basil-graphite/50">{dish.weight}</span>
-                  <span className="font-serif text-lg font-semibold text-basil-deep">
+
+              {/* Content */}
+              <div className="mt-4 flex flex-1 flex-col">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="font-serif text-xl font-normal text-basil-cream">
+                    {dish.name}
+                  </h3>
+                  <span className="font-serif text-lg text-basil-cream/80">
                     {dish.price}
                   </span>
                 </div>
+                {/* Dotted separator */}
+                <div className="mt-2 flex-1 border-b border-dotted border-basil-cream/15" />
+                <p className="mt-2.5 text-sm leading-relaxed text-basil-cream/50">
+                  {dish.description}
+                </p>
+                <span className="mt-3 text-xs font-medium uppercase tracking-wider text-basil-cream/35">
+                  {dish.weight}
+                </span>
               </div>
             </article>
           ))}
         </div>
 
-        <div className="reveal mt-12 text-center">
+        {/* CTA */}
+        <div className="reveal mt-14 text-center sm:mt-20">
           <button
             onClick={scrollToBooking}
-            className="rounded-full border border-basil-deep px-8 py-4 text-sm font-semibold tracking-wide text-basil-deep transition-all hover:bg-basil-deep hover:text-basil-cream"
+            className="rounded-full border border-basil-cream/25 px-8 py-4 text-sm font-semibold tracking-wide text-basil-cream transition-all hover:border-basil-cream/50 hover:bg-basil-cream/5"
           >
             Забронировать столик
           </button>
