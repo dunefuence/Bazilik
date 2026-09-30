@@ -213,26 +213,53 @@ export const MENU_CATEGORIES: MenuCategory[] = [
   },
 ];
 
-export const RECOMMENDATIONS = [
+export type Recommendation = {
+  name: string;
+  category: string;
+  description: string;
+  weight: string;
+  price: string;
+  image: string;
+  featured?: boolean;
+};
+
+export const RECOMMENDATIONS: Recommendation[] = [
   {
-    title: 'Фирменное блюдо',
+    name: 'Мясное ассорти',
+    category: 'Горячие блюда',
+    description: 'Подача на двоих: рёбра, колбаски, медальон, фирменные соусы',
+    weight: '600 г',
+    price: '—',
     image:
-      'https://images.pexels.com/photos/28705621/pexels-photo-28705621.jpeg?auto=compress&cs=tinysrgb&h=800&w=600',
+      'https://images.pexels.com/photos/28705621/pexels-photo-28705621.jpeg?auto=compress&cs=tinysrgb&h=800&w=1000',
+    featured: true,
   },
   {
-    title: 'Стейк',
+    name: 'Стейк Рибай',
+    category: 'Гриль',
+    description: 'Стейк из мраморной говядины на углях, масло с травами',
+    weight: '350 г',
+    price: '—',
     image:
-      'https://images.pexels.com/photos/36683024/pexels-photo-36683024.jpeg?auto=compress&cs=tinysrgb&h=800&w=600',
+      'https://images.pexels.com/photos/36683024/pexels-photo-36683024.jpeg?auto=compress&cs=tinysrgb&h=600&w=800',
   },
   {
-    title: 'Фирменная закуска',
+    name: 'Карпаччо из говядины',
+    category: 'Закуски',
+    description: 'Тонкие слайсы сырой говядины, пармезан, оливковое масло',
+    weight: '120 г',
+    price: '—',
     image:
-      'https://images.pexels.com/photos/6488855/pexels-photo-6488855.jpeg?auto=compress&cs=tinysrgb&h=800&w=600',
+      'https://images.pexels.com/photos/6488855/pexels-photo-6488855.jpeg?auto=compress&cs=tinysrgb&h=600&w=800',
   },
   {
-    title: 'Авторский коктейль',
+    name: 'Эспрессо мартини',
+    category: 'Бар',
+    description: 'Водка, кофе, сливки, кофейные зёрна',
+    weight: '120 мл',
+    price: '—',
     image:
-      'https://images.pexels.com/photos/15750737/pexels-photo-15750737.jpeg?auto=compress&cs=tinysrgb&h=800&w=600',
+      'https://images.pexels.com/photos/15750737/pexels-photo-15750737.jpeg?auto=compress&cs=tinysrgb&h=600&w=800',
   },
 ];
 
